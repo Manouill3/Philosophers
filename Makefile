@@ -6,7 +6,7 @@
 #    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/27 09:30:21 by mdegache          #+#    #+#              #
-#    Updated: 2025/03/27 09:35:29 by mdegache         ###   ########.fr        #
+#    Updated: 2025/06/04 13:41:15 by mdegache         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,13 @@ NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRC = main.c
+SRC = main.c\
+		init.c\
+		libft_funct.c
 	
-OBJ = $(SRC:.c=.o)
+
+OBJ_DIR = build
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 
 all: $(NAME)
 
@@ -30,11 +34,12 @@ $(NAME): $(OBJ)
 	@$(CC) $(SRC) $(CFLAGS) -o $(NAME)
 	@echo "$(GREEN)SUCCESS$(RESET)"
 
-%.o: %.c
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@rm -f $(OBJ)
+	@rm -rf $(OBJ_DIR)
 	@echo "$(PURPLE)CLEAN$(RESET)"
 
 fclean: clean
@@ -42,5 +47,3 @@ fclean: clean
 	@echo "$(RED)FCLEAN$(RESET)"
 
 re: fclean all
-
-.PHONY: all clean fclean re

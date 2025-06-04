@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 09:28:32 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/27 10:18:02 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/04 14:08:40 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,26 @@
 
 typedef struct s_philo
 {
-    int id;
-    int time_to_die;
-    int time_to_eat;
-    int time_to_sleep;
-    int nb_meals;
-    struct timeval last_meal;
-    struct timeval start;
-    pthread_mutex_t left_fork;
-    pthread_mutex_t right_fork;
+	
 } t_philo;
+
+typedef struct s_param
+{
+	int nb_philo;
+	int time_d;
+	int time_e;
+	int time_s;
+	int nb_dish;
+} t_param;
+
+///*init.c*///
+
+int verif_arg(int ac, char **av);
+int init_arg(int ac, char **av, t_param *arg);
+
+///*libft_funct.c*///
+
+long	ft_atoi(const char *nptr);
+int	ft_isdigit(int i);
 
 #endif
