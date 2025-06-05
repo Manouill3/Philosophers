@@ -6,13 +6,13 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:38:01 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/04 14:08:30 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/05 10:31:03 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-long	ft_atoi(const char *nptr)
+long	ft_atol(const char *nptr)
 {
 	int		i;
 	long	nb;
