@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lst_philo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 08:48:34 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/10 09:30:23 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/10 20:19:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-t_philo	*ft_lstnew(int i)
+t_philo	*ft_lstnew(int i, t_param *arg)
 {
 	t_philo	*lst;
 
@@ -20,6 +20,9 @@ t_philo	*ft_lstnew(int i)
 	if (!lst)
 		return (0);
 	lst->name = i;
+	lst->count_dish = 0;
+	lst->arg = arg;
+	lst->prev = NULL;
 	lst->next = NULL;
 	return (lst);
 }
@@ -37,6 +40,7 @@ void	ft_lstadd_back(t_philo **lst, t_philo *new)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
+	new->prev = tmp;
 }
 
 void	ft_lstdelone(t_philo *lst)
