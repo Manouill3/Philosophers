@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 09:28:32 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/05 14:00:43 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:15:02 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@
 
 typedef struct s_philo
 {
+	int	name;
 	int	count_dish;
+	t_philo	*next;
+	t_param	*arg;
 } t_philo;
 
 typedef struct s_param
@@ -31,6 +34,7 @@ typedef struct s_param
 	int time_e;
 	int time_s;
 	int nb_dish;
+	t_philo	*philos;
 } t_param;
 
 ///*init_arg.c*///
@@ -46,6 +50,14 @@ int	ft_isdigit(int i);
 
 ///*init_philo.c*///
 
+int    init_philo(t_param *arg);
 
+///*lst_philo.c*///
+
+void	last_next(t_philo *lst);
+t_philo	*ft_lstnew(int i);
+void	ft_lstadd_back(t_philo **lst, t_philo *new);
+void	ft_lstdelone(t_philo *lst);
+void	ft_lstclear(t_philo **lst);
 
 #endif

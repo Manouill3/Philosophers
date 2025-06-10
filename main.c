@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 09:26:37 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/05 13:58:14 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/10 14:42:35 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ int main(int ac, char **av)
 		printf("Error: some bad arguments\n");
 		return (1);
 	}
-	init_philo(arg);
+	if (init_philo(arg))
+	{
+		free(arg);
+		return ;
+	}
 	free(arg);
 	return (0);
 }
