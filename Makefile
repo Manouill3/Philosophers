@@ -6,7 +6,7 @@
 #    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/27 09:30:21 by mdegache          #+#    #+#              #
-#    Updated: 2025/06/04 13:41:15 by mdegache         ###   ########.fr        #
+#    Updated: 2025/06/11 09:13:17 by mdegache         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,10 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
 SRC = main.c\
-		init.c\
-		libft_funct.c
+		init_arg.c\
+		init_philo.c\
+		utils.c\
+		lst_philo.c
 	
 
 OBJ_DIR = build

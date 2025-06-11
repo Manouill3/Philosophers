@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_philo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 08:48:34 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/10 20:19:28 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/11 09:46:04 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ t_philo	*ft_lstnew(int i, t_param *arg)
 	lst->arg = arg;
 	lst->prev = NULL;
 	lst->next = NULL;
+	if (pthread_mutex_init(&lst->fork, NULL))
+	{
+		free(lst);
+		return (NULL);
+	}
 	return (lst);
 }
 
@@ -47,20 +52,24 @@ void	ft_lstdelone(t_philo *lst)
 {
 	if (!lst)
 		return ;
+	pthread_mutex_destroy(&lst->fork);
 	free(lst);
 }
 
-void	ft_lstclear(t_philo **lst)
+void	ft_lstclear(t_philo **lst, t_param *arg)
 {
+	int	i;
 	t_philo	*tmp;
 
 	if (!lst || !*lst)
 		return ;
-	while (*lst)
+	i = 0;
+	while (arg->nb_philo > i)
 	{
 		tmp = (*lst)->next;
 		ft_lstdelone(*lst);
 		*lst = tmp;
+		i++;
 	}
 	*lst = NULL;
 }

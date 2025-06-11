@@ -6,11 +6,18 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 09:26:37 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/10 14:42:35 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/11 09:46:12 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "philosophers.h"
+
+void	free_all(t_param *arg)
+{
+	if (arg->philos)
+		ft_lstclear(&arg->philos, arg);
+	free(arg);
+}
 
 int main(int ac, char **av)
 {
@@ -27,13 +34,14 @@ int main(int ac, char **av)
 	if (init_arg(ac, av, arg))
 	{
 		printf("Error: some bad arguments\n");
+		free(arg);
 		return (1);
 	}
 	if (init_philo(arg))
 	{
-		free(arg);
-		return ;
+		free_all(arg);
+		return (1);
 	}
-	free(arg);
+	free_all(arg);
 	return (0);
 }
