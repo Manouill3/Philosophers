@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 09:28:32 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/11 09:46:27 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/12 08:12:33 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int init_arg(int ac, char **av, t_param *arg);
 
 long	ft_atol(const char *nptr);
 int	ft_isdigit(int i);
-int	get_start_time(void);
+int	timestamp(void);
 
 ///*init_philo.c*///
 

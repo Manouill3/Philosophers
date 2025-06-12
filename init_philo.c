@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:01:22 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/11 14:34:24 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/12 14:37:15 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 void	*routine_funct(void *lst)
 {
 	t_philo	*philo;
-	pthread_t tid;
 	
 	philo = (t_philo *)lst;
-	
+	if (philo->name % 2 == 0)
+		ft_usleep(philo->arg->time_e);
+	while (!is_dead())
+	{
+		take_fork();
+	}
 	return (NULL);
 }
 
@@ -52,7 +56,7 @@ int    init_philo(t_param *arg)
 
 	i = 0;
 	arg->philos = NULL;
-	arg->time_start = get_start_time();
+	arg->time_start = timestamp();
 	while (i < arg->nb_philo)
 	{
 		node = ft_lstnew(i, arg);

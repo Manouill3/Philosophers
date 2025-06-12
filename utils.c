@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:38:01 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/11 08:29:33 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/12 09:51:16 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,19 @@ int	ft_isdigit(int i)
 	return (0);
 }
 
-int	get_start_time(void)
+int	timestamp(void)
 {
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
+void	ft_usleep(int ms)
+{
+	int	time;
+
+	time = timestamp();
+	while (timestamp() - time < ms)
+		usleep(ms / 10);
 }

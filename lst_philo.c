@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 08:48:34 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/11 09:46:04 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/12 10:55:10 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,5 @@ void	last_next(t_philo *lst)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = lst;
+	lst->prev = tmp;
 }
