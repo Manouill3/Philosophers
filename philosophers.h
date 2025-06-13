@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 09:28:32 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/12 08:12:33 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/13 08:34:43 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_param
 	int 		time_s;
 	int 		nb_dish;
 	long int	time_start;
+	pthread_mutex_t	print;
 	t_philo		*philos;
 } t_param;
 
