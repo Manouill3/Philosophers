@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 11:12:14 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/13 08:36:16 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:56:22 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ int init_arg(int ac, char **av, t_param *arg)
 	if (check_over(ac, arg))
 		return (1);
 	pthread_mutex_init(&arg->print, NULL);
+	pthread_mutex_init(&arg->eat, NULL);
 	return (0);
 }

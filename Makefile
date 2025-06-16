@@ -6,7 +6,7 @@
 #    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/27 09:30:21 by mdegache          #+#    #+#              #
-#    Updated: 2025/06/11 09:13:17 by mdegache         ###   ########.fr        #
+#    Updated: 2025/06/16 11:20:09 by mdegache         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC = main.c\
 		init_arg.c\
 		init_philo.c\
 		utils.c\
-		lst_philo.c
+		lst_philo.c\
+		routine.c
 	
 
 OBJ_DIR = build
