@@ -6,11 +6,24 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 09:43:19 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/16 15:13:03 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/17 13:35:08 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int	check_death(t_philo *philo)
+{
+	int	time;
+
+	time = timestamp();
+	if (time - philo->time_leat >= philo->arg->time_d)
+	{
+		print(philo, "died");
+		return (1);
+	}
+	return (0);
+}
 
 void	eat(t_philo *philos)
 {
@@ -19,11 +32,13 @@ void	eat(t_philo *philos)
 	pthread_mutex_lock(&philos->arg->eat);
 	time = timestamp();
 	print(philos, "is eating");
-	usleep(philos->arg->time_e);
+	philos->time_leat = timestamp();
+	ft_usleep(philos->arg->time_e);
 	pthread_mutex_unlock(&philos->fork);
 	pthread_mutex_unlock(&philos->next->fork);
 	pthread_mutex_unlock(&philos->arg->eat);
-	usleep(philos->arg->time_s);
+	print(philos, "is sleeping");
+	ft_usleep(philos->arg->time_s);
 	print(philos, "is thinking");
 }
 

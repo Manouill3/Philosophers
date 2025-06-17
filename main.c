@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 09:26:37 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/11 09:46:12 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/17 10:39:22 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	free_all(t_param *arg)
 {
 	if (arg->philos)
 		ft_lstclear(&arg->philos, arg);
+	pthread_mutex_destroy(&arg->print);
+	pthread_mutex_destroy(&arg->eat);
 	free(arg);
 }
 
