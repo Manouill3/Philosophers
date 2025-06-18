@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 09:28:32 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/18 10:11:06 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/18 19:37:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int init_arg(int ac, char **av, t_param *arg);
 long	ft_atol(const char *nptr);
 int	ft_isdigit(int i);
 int	timestamp(void);
-void	ft_usleep(int ms);
+int	ft_usleep(int ms, t_philo *philo);
 
 ///*init_philo.c*///
 

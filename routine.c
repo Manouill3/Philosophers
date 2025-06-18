@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 09:43:19 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/18 14:41:02 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/18 19:44:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	check_death(t_philo *philo)
 
 int	eat(t_philo *philos)
 {
-	int	time;
+	// int	time;
 	
 	pthread_mutex_lock(&philos->arg->eat);
-	time = timestamp();
+	// time = timestamp();
 	print(philos, "is eating");
 	philos->count_dish += 1;
 	philos->time_leat = timestamp();
@@ -44,14 +44,16 @@ int	eat(t_philo *philos)
 		pthread_mutex_unlock(&philos->fork);
 		return (1);
 	}
-	ft_usleep(philos->arg->time_e);
+	if (ft_usleep(philos->arg->time_e, philos))
+		return (1);
 	pthread_mutex_unlock(&philos->arg->eat);
 	pthread_mutex_unlock(&philos->next->fork);
 	pthread_mutex_unlock(&philos->fork);
 	if (philos->arg->nb_dish == philos->count_dish || philos->arg->is_dead) 
 		return (1);
 	print(philos, "is sleeping");
-	ft_usleep(philos->arg->time_s);
+	if (ft_usleep(philos->arg->time_s, philos))
+		return (1);
 	print(philos, "is thinking");
 	return (0);
 }

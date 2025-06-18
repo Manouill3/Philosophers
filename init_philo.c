@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:01:22 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/18 13:10:45 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/18 19:38:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*routine_funct(void *lst)
 	
 	philo = (t_philo *)lst;
 	if (philo->name % 2 != 0)
-		ft_usleep(philo->arg->time_s);
+		ft_usleep(philo->arg->time_s, philo);
 	while (!philo->arg->is_dead)
 	{
 		if (take_fork(philo))
