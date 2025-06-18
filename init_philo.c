@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:01:22 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/17 14:03:55 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/18 13:10:45 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@ void	*routine_funct(void *lst)
 	philo = (t_philo *)lst;
 	if (philo->name % 2 != 0)
 		ft_usleep(philo->arg->time_s);
-	while (1)
+	while (!philo->arg->is_dead)
 	{
 		if (take_fork(philo))
 			break ;
-		eat(philo);
+		if (eat(philo))
+			break ;
 		if (check_death(philo))
+			break ;
+		if (philo->count_dish == philo->arg->nb_dish)
 			break ;
 	}
 	return (NULL);
@@ -59,7 +62,7 @@ int    init_philo(t_param *arg)
 	t_philo *node;
 
 	i = 0;
-	arg->ind_philo = 0;
+	arg->is_dead = 0;
 	arg->philos = NULL;
 	arg->time_start = timestamp();
 	while (i < arg->nb_philo)

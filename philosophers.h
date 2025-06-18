@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 09:28:32 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/17 14:04:15 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/18 10:11:06 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct s_param
 	int 		time_s;
 	int 		nb_dish;
 	int			time_start;
+	bool		is_dead;
+	pthread_mutex_t	die;
 	pthread_mutex_t	print;
 	pthread_mutex_t eat;
 	t_philo		*philos;
@@ -79,7 +81,7 @@ void	ft_lstclear(t_philo **lst, t_param *arg);
 ///*routine.c*///
 
 int	check_death(t_philo *philo);
-void	eat(t_philo *philos);
+int	eat(t_philo *philos);
 void	print(t_philo *philos, char *str);
 int    take_fork(t_philo *philos);
 
