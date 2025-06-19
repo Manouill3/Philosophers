@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 09:43:19 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/18 19:44:05 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/19 12:30:32 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	check_death(t_philo *philo)
 {
-	int	time;
+	long long	time;
 
-	time = timestamp();
+	time = timestamp() - philo->arg->time_start;
 	if (time - philo->time_leat >= philo->arg->time_d)
 	{
 		print(philo, "died");
@@ -30,13 +30,10 @@ int	check_death(t_philo *philo)
 
 int	eat(t_philo *philos)
 {
-	// int	time;
-	
 	pthread_mutex_lock(&philos->arg->eat);
-	// time = timestamp();
 	print(philos, "is eating");
 	philos->count_dish += 1;
-	philos->time_leat = timestamp();
+	philos->time_leat = timestamp() - philos->arg->time_start;
 	if (philos->arg->nb_dish == philos->count_dish || philos->arg->is_dead)
 	{
 		pthread_mutex_unlock(&philos->arg->eat);
@@ -60,14 +57,14 @@ int	eat(t_philo *philos)
 
 void	print(t_philo *philos, char *str)
 {
-	int	time;
+	long long	time;
 	
 	pthread_mutex_lock(&philos->arg->die);
 	if (!philos->arg->is_dead)
 	{
 		pthread_mutex_lock(&philos->arg->print);
 		time = timestamp() - philos->arg->time_start;
-		printf("%d %d %s\n", time, philos->name, str);
+		printf("%lld %d %s\n", time, philos->name, str);
 		pthread_mutex_unlock(&philos->arg->print);
 	}
 	pthread_mutex_unlock(&philos->arg->die);

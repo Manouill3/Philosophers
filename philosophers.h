@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 09:28:32 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/18 19:37:04 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/19 11:02:18 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_param
 	int 		time_e;
 	int 		time_s;
 	int 		nb_dish;
-	int			time_start;
+	long long			time_start;
 	bool		is_dead;
 	pthread_mutex_t	die;
 	pthread_mutex_t	print;
@@ -61,7 +61,7 @@ int init_arg(int ac, char **av, t_param *arg);
 
 long	ft_atol(const char *nptr);
 int	ft_isdigit(int i);
-int	timestamp(void);
+long long	timestamp(void);
 int	ft_usleep(int ms, t_philo *philo);
 
 ///*init_philo.c*///

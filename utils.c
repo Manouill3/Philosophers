@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:38:01 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/18 19:40:55 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/19 14:10:13 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_isdigit(int i)
 	return (0);
 }
 
-int	timestamp(void)
+long long	timestamp(void)
 {
 	struct timeval	tv;
 
@@ -54,20 +54,26 @@ int	timestamp(void)
 
 int	ft_usleep(int ms, t_philo *philo)
 {
-	int	diff;
-	int	time;
-	int	tmp;
-
-	tmp = 0;
+	long long	time;
+	long long	print_time;
+	long long	actual_time;
+	
 	time = timestamp();
-	diff = time - philo->time_leat;
-	while (timestamp() - time < ms)
+	print_time = time - philo->arg->time_start;
+	actual_time = print_time - philo->time_leat;
+	if (actual_time + ms < philo->arg->time_d)
+	{	
+		while (timestamp() - time < ms)
+			usleep(ms / 10);
+	}
+	else
 	{
-		tmp += ms / 10;
-		usleep(ms / 10);
-		if (ms == philo->arg->time_d && philo->arg->time_d != philo->arg->time_s
-			&& tmp + diff > philo->arg->time_d)
-			return (1);
+		while ((timestamp() - philo->arg->time_start) - print_time < philo->arg->time_d - actual_time)
+			usleep(ms /10);
+		print(philo, "died");
+		pthread_mutex_lock(&philo->arg->die);
+		philo->arg->is_dead = 1;
+		pthread_mutex_unlock(&philo->arg->die);
 	}
 	return (0);
 }
