@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 09:43:19 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/19 12:30:32 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/20 14:38:27 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	eat(t_philo *philos)
 	pthread_mutex_lock(&philos->arg->eat);
 	print(philos, "is eating");
 	philos->count_dish += 1;
-	philos->time_leat = timestamp() - philos->arg->time_start;
 	if (philos->arg->nb_dish == philos->count_dish || philos->arg->is_dead)
 	{
 		pthread_mutex_unlock(&philos->arg->eat);
@@ -43,6 +42,7 @@ int	eat(t_philo *philos)
 	}
 	if (ft_usleep(philos->arg->time_e, philos))
 		return (1);
+	philos->time_leat = timestamp() - philos->arg->time_start;
 	pthread_mutex_unlock(&philos->arg->eat);
 	pthread_mutex_unlock(&philos->next->fork);
 	pthread_mutex_unlock(&philos->fork);
