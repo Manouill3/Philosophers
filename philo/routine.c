@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 09:43:19 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/23 16:04:25 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/24 13:08:05 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,29 @@ int	eat(t_philo *philos)
 	pthread_mutex_lock(&philos->arg->eat);
 	print(philos, "is eating");
 	philos->count_dish += 1;
+	pthread_mutex_lock(&philos->arg->die);
 	if (philos->arg->nb_dish == philos->count_dish || philos->arg->is_dead)
 	{
+		pthread_mutex_unlock(&philos->arg->die);
 		pthread_mutex_unlock(&philos->arg->eat);
 		pthread_mutex_unlock(&philos->next->fork);
 		pthread_mutex_unlock(&philos->fork);
 		return (1);
 	}
+	pthread_mutex_unlock(&philos->arg->die);
 	pthread_mutex_unlock(&philos->arg->eat);
+	philos->time_leat = timestamp() - philos->arg->time_start;
 	if (ft_usleep(philos->arg->time_e, philos))
 		return (1);
 	pthread_mutex_unlock(&philos->next->fork);
 	pthread_mutex_unlock(&philos->fork);
-	philos->time_leat = timestamp() - philos->arg->time_start;
-	if (philos->arg->nb_dish == philos->count_dish || philos->arg->is_dead) 
+	pthread_mutex_lock(&philos->arg->die);
+	if (philos->arg->nb_dish == philos->count_dish || philos->arg->is_dead)
+	{
+		pthread_mutex_unlock(&philos->arg->die);
 		return (1);
+	}
+	pthread_mutex_unlock(&philos->arg->die);
 	print(philos, "is sleeping");
 	if (ft_usleep(philos->arg->time_s, philos))
 		return (1);
@@ -58,7 +66,7 @@ int	eat(t_philo *philos)
 void	print(t_philo *philos, char *str)
 {
 	long long	time;
-	
+
 	pthread_mutex_lock(&philos->arg->die);
 	if (!philos->arg->is_dead)
 	{
@@ -70,20 +78,20 @@ void	print(t_philo *philos, char *str)
 	pthread_mutex_unlock(&philos->arg->die);
 }
 
-int    take_fork(t_philo *philos)
+int	take_fork(t_philo *philos)
 {
 	pthread_mutex_t	*first;
 	pthread_mutex_t	*second;
 	pthread_mutex_t	*tmp;
-	
+
 	first = &philos->fork;
 	second = &philos->next->fork;
 	if (first > second)
 	{
-        tmp = first;
-        first  = second;
-        second = tmp;
-    }
+		tmp = first;
+		first = second;
+		second = tmp;
+	}
 	pthread_mutex_lock(first);
 	print(philos, "has taken a fork");
 	if (philos->arg->nb_philo == 1)

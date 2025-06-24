@@ -6,11 +6,11 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 09:26:37 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/18 09:16:51 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/24 09:33:04 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philosophers.h"
+#include "philosophers.h"
 
 void	free_all(t_param *arg)
 {
@@ -22,10 +22,10 @@ void	free_all(t_param *arg)
 	free(arg);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_param *arg;
-	
+	t_param	*arg;
+
 	if (ac != 5 && ac != 6)
 	{
 		printf("Error: wrong number of arguments\n");

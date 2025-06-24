@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 08:48:34 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/23 15:21:42 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/24 08:12:07 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_lstdelone(t_philo *lst)
 
 void	ft_lstclear(t_philo **lst, t_param *arg)
 {
-	int	i;
+	int		i;
 	t_philo	*tmp;
 
 	if (!lst || !*lst)
