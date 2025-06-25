@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 09:28:32 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/24 10:37:18 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/25 10:59:39 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,12 @@ int			ft_isdigit(int i);
 long long	timestamp(void);
 int			ft_usleep(int ms, t_philo *philo);
 int			check_is_dead(t_philo *philo);
+void	ft_wait(t_philo *philo);
 
 ///*init_philo.c*///
 
 void		*routine_funct(void *lst);
-void		start_routine(t_philo *philos);
+void		start_routine(t_philo *philo);
 int			init_philo(t_param *arg);
 
 ///*lst_philo.c*///
@@ -82,8 +83,8 @@ void		ft_lstclear(t_philo **lst, t_param *arg);
 ///*routine.c*///
 
 int			check_death(t_philo *philo);
-int			eat(t_philo *philos);
-void		print(t_philo *philos, char *str);
-int			take_fork(t_philo *philos);
+int			eat(t_philo *philo);
+void		print(t_philo *philo, char *str);
+int			take_fork(t_philo *philo);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:38:01 by mdegache          #+#    #+#             */
-/*   Updated: 2025/06/24 13:23:22 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/06/25 13:02:09 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,31 @@ int	check_is_dead(t_philo *philo)
 	}
 	pthread_mutex_unlock(&philo->arg->die);
 	return (0);
+}
+
+void	ft_wait(t_philo *philo)
+{
+	long long	time;
+	
+	time = timestamp() - philo->arg->time_start;
+	while ((timestamp() - philo->arg->time_start) - time <= philo->arg->time_e - philo->arg->time_s)
+	{
+		if ((timestamp() - philo->arg->time_start) - philo->time_leat >= philo->arg->time_d)
+		{
+			pthread_mutex_lock(&philo->arg->die);
+			if (philo->arg->is_dead == 0)
+			{
+				pthread_mutex_unlock(&philo->arg->die);
+				print(philo, "died");
+				pthread_mutex_lock(&philo->arg->die);
+				philo->arg->is_dead = 1;
+				pthread_mutex_unlock(&philo->arg->die);
+				return ;
+			}
+			pthread_mutex_unlock(&philo->arg->die);
+			break ;
+		}
+		usleep(philo->arg->time_d / 10);
+	}
+	return ;
 }
